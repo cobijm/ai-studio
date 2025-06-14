@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx src/gen-ai.ts"
+    "thom-ai": "tsx src/thom-ai.ts"
   },
   "keywords": [],
   "author": "",
