@@ -1,5 +1,3 @@
----
-
 # AI Studio Project
 
 *A Node.js application for interactive AI personas, built with TypeScript, Prisma, and PostgreSQL.*
