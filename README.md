@@ -1,7 +1,3 @@
-Of course! Here is a version of your README formatted with additional Markdown elements like badges, blockquotes, and emojis to make it look polished and professional on GitHub.
-
-Just copy and paste the entire block below directly into your `README.md` file.
-
 ---
 
 # AI Studio Project
