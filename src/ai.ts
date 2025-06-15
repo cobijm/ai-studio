@@ -2,23 +2,12 @@ import { GoogleGenAI, Content } from "@google/genai";
 import readline from 'readline/promises';
 import chalk from 'chalk';
 import { ContextFactory, ContextType } from './context-factory';
+import { prisma } from './db';
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-const cavemanFace = `
-   _______
-  /       \
- |  .-. .-.|
- |  | | | ||
- |  \_/ \_/|
- |   ___   |
- |  (___)  |
-  \_______/
-`;
-
-async function chooseAiPersona(rl: readline.Interface, factory: ContextFactory): Promise<ContextType> {
-  const availablePersonas = factory.getAvailableContexts();
-
+async function chooseAiPersona(rl: readline.Interface, factory: ContextFactory): Promise<string> {
+  const availablePersonas = await factory.getAvailableContexts();
   while (true) {
     console.log(chalk.yellow("Please choose an AI persona to chat with:"));
     availablePersonas.forEach((persona, index) => {
@@ -39,11 +28,6 @@ async function chooseAiPersona(rl: readline.Interface, factory: ContextFactory):
 }
 
 async function main() {
-
-
-  // console.log(chalk.blue.underline("Thom AI: wat thom doeing"));
-  // console.log("------------------------------------");
-
   // Create the readline interface for command-line input/output
   const rl = readline.createInterface({
     input: process.stdin,
@@ -53,24 +37,27 @@ async function main() {
   // Use a specific, current model name
   const model = "gemini-2.0-flash";
 
-
-  const contextFactory = new ContextFactory();
+  const contextFactory = new ContextFactory(prisma);
   const chosenPersona = await chooseAiPersona(rl, contextFactory);
-  const history = contextFactory.getContext(chosenPersona);
+  const initialHistory = await contextFactory.getContext(chosenPersona);
 
   async function chatLoop() {
+    const history: Content[] = [...initialHistory];
+
+    console.log(chalk.green(`${chosenPersona}: wat thom doeing`));
+    console.log("------------------------------------");
+
     while (true) {
       const userInput: string = await rl.question(chalk.redBright("Thom: "));
       if (userInput.toLowerCase() === 'sleep') {
-        console.log("Thom AI going to sleep...");
+        console.log(`${chosenPersona} going to sleep...`);
         rl.close();
         break;
       }
 
       try {
         // Use a "thinking" indicator for better UX
-        process.stdout.write(chalk.green("Thom AI: ... "));
-        // process.stdout.write(chalk.green(`Thom AI: ${cavemanFace} ... `));
+        process.stdout.write(chalk.green(`${chosenPersona} AI: ... `));
 
         // The modern way to generate content with history
         const response = await ai.models.generateContent({
@@ -82,12 +69,12 @@ async function main() {
         });
 
         // The response text is a string
-        const text: string = response.text;
+        const text = response.text;
 
         // Clear the "thinking" message and write the final response
         process.stdout.clearLine(0);
         process.stdout.cursorTo(0);
-        console.log(chalk.green(`Thom AI: ${text}`));
+        console.log(chalk.green(`${chosenPersona} AI: ${text}`));
         console.log("------------------------------------");
 
 

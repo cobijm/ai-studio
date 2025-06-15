@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "thom-ai": "tsx src/thom-ai.ts"
+    "ai": "tsx src/ai.ts"
   },
   "keywords": [],
   "author": "",
@@ -12,13 +12,18 @@
   "description": "",
   "devDependencies": {
     "@google/genai": "latest",
+    "prisma": "^6.9.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.3",
+    "@prisma/client": "^6.9.0",
     "axios": "^1.9.0",
     "chalk": "^5.4.1"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
