@@ -1,4 +1,4 @@
-# AI Studio Project
+# AI Persona's
 
 *A Node.js application for interactive AI personas, built with TypeScript, Prisma, and PostgreSQL.*
 
@@ -48,15 +48,7 @@ npm install
 
 > ℹ️ The application uses a `.env` file to manage environment-specific variables like database credentials. This file is not committed to version control for security reasons.
 
-*   Create a copy of the example environment file, **`.env.example`**, and name it **`.env`**.
-
-    ```bash
-    # On macOS/Linux
-    cp .env.example .env
-
-    # On Windows
-    copy .env.example .env
-    ```
+*   Create an environment file and name it **`.env`**.
 
 *   Open the newly created **`.env`** file and add your PostgreSQL database connection URL.
 

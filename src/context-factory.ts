@@ -1,7 +1,7 @@
 import { Content } from "@google/genai";
 import type { PrismaClient } from '@prisma/client'; 
 
-export type ContextType = "thom" | "ano" | "travelAgent";
+export type ContextType = "thom" | "ano";
 
 /**
  * A factory class to store and provide predefined conversation contexts (pre-prompts).
@@ -43,17 +43,3 @@ export class ContextFactory {
         return persona.initialHistory as Content[];
     }
 }
-
-// public getAvailableContexts(): ContextType[] {
-//     return Array.from(this.contexts.keys());
-// }
-/**
- * Retrieves a predefined context by its name.
- * @param name The name of the context to retrieve.
- * @returns A copy of the Content[] array for the context, or undefined if not found.
- */
-// public getContext(name: ContextType): Content[] | undefined {
-//     const context = this.contexts.get(name);
-//     return context ? [...context] : undefined;
-// }
-
