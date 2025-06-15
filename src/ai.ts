@@ -10,7 +10,7 @@ async function chooseAiPersona(rl: readline.Interface, factory: ContextFactory):
   const availablePersonas = await factory.getAvailableContexts();
   while (true) {
     console.log(chalk.yellow("Please choose an AI persona to chat with:"));
-    availablePersonas.forEach((persona, index) => {
+    availablePersonas.forEach((persona: any, index: number) => {
       console.log(`  ${chalk.cyan(index + 1)}: ${persona}`);
     });
 

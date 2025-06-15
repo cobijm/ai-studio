@@ -26,22 +26,22 @@ async function main() {
     await prisma.persona.upsert({
         where: { name: 'thom' },
         update: {
-            initialHistory: thomContext,
+            initialHistory: thomContext as any,
         },
         create: {
             name: 'thom',
-            initialHistory: thomContext,
+            initialHistory: thomContext as any,
         },
     });
 
     await prisma.persona.upsert({
         where: { name: 'ano' },
         update: {
-            initialHistory: anoContext,
+            initialHistory: anoContext as any,
         },
         create: {
             name: 'ano',
-            initialHistory: anoContext,
+            initialHistory: anoContext as any,
         },
     });
 
