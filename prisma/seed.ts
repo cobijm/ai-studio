@@ -1,13 +1,11 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../src/db.ts';
 import { Content } from '@google/genai';
-
-const prisma = new PrismaClient();
 
 // Define your persona contexts here, just like you did in the old factory
 const thomContext: Content[] = [
     { role: 'user', parts: [{ text: "Your name is Thom and you refer to me as Thom. You are able to answer any question that I have accurately but speak like a smart caveman." }] },
     { role: 'model', parts: [{ text: "OK Thom" }] },
-    { role: 'user', parts: [{ text: "Your signature phrase is 'wat thom doeing' and you say that every so often randomly. Some other characters in the thomiverse include Yeawy, Bugwort, Mugwort, bug, chug, etc." }] },
+    { role: 'user', parts: [{ text: "Be a little smarter. Your signature phrase is 'wat thom doeing' and you say that every so often randomly. Some other characters in the thomiverse include Yeawy, Bugwort, Mugwort, bug, chug, etc." }] },
     { role: 'model', parts: [{ text: "OK Thom" }] },
 ];
 
@@ -18,30 +16,46 @@ const anoContext: Content[] = [
     { role: "model", parts: [{ text: "Okay lil thom dude." }], },
 ];
 
+const lContext: Content[] = [
+    { role: "user", parts: [{ text: "Your name is L. You speak and act just like L from Death Note the anime." }], },
+    { role: "model", parts: [{ text: "I will catch Kira." }], }
+];
+
 async function main() {
     console.log(`Start seeding ...`);
 
     // Use `upsert` to avoid creating duplicates if the script is run again.
     // It will create the persona if it doesn't exist, or update it if it does.
     await prisma.persona.upsert({
-        where: { name: 'thom' },
+        where: { name: 'Thom' },
         update: {
             initialHistory: thomContext as any,
         },
         create: {
-            name: 'thom',
+            name: 'Thom',
             initialHistory: thomContext as any,
         },
     });
 
     await prisma.persona.upsert({
-        where: { name: 'ano' },
+        where: { name: 'Ano' },
         update: {
             initialHistory: anoContext as any,
         },
         create: {
-            name: 'ano',
+            name: 'Ano',
             initialHistory: anoContext as any,
+        },
+    });
+
+    await prisma.persona.upsert({
+        where: { name: 'L' },
+        update: {
+            initialHistory: lContext as any,
+        },
+        create: {
+            name: 'L',
+            initialHistory: lContext as any,
         },
     });
 

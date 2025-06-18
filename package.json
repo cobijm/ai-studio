@@ -4,7 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "ai": "tsx src/main.ts"
+    "start": "tsx src/main.ts",
+    "dev": "tsx --watch src/main.ts"
   },
   "keywords": [],
   "author": "",
