@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "tsx src/main.ts",
-    "dev": "tsx --watch src/main.ts"
+    "dev": "tsx --watch src/main.ts",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -16,11 +17,12 @@
     "prisma": "^6.9.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@types/node": "^24.0.3"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.3",
-    "@prisma/client": "^6.9.0",
+    "@prisma/client": "^6.10.0",
     "axios": "^1.9.0",
     "chalk": "^5.4.1"
   },
